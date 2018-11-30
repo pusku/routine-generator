@@ -2,7 +2,9 @@
 @section('body')
 <div class="container">
 <h1>Generated Routine</h1>
-
+            <select name="" class="chosen-select-member form-control"  data-placeholder="Choose group names...">
+                <option value="" selected>1A</option>
+            </select>
 <!-- will be used to show any messages -->
 @if (Session::has('message'))
     <div class="alert alert-info">{{ Session::get('message') }}</div>

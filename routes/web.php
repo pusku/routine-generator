@@ -83,3 +83,16 @@ Route::post('/day/add',[
 Route::get('/deleteday/{id}', 'DayController@deleteDay')->name('deleteDay');
 Route::get('/editday/{id}', 'DayController@editDay')->name('editDay');
 Route::post('/updateday/{id}', 'DayController@updateDay')->name('updateDay');
+
+//Assign teacher to course
+// Route::get('/days',[
+//     'uses' => 'AssignTeacherController@index',
+//     'as' => 'assignTeacher'
+// ]);
+// Route::post('/day/add',[
+//     'uses' => 'DayController@insertDay',
+//     'as' => 'addDay'
+// ]);
+// Route::get('/deleteday/{id}', 'DayController@deleteDay')->name('deleteDay');
+// Route::get('/editday/{id}', 'DayController@editDay')->name('editDay');
+// Route::post('/updateday/{id}', 'DayController@updateDay')->name('updateDay');
