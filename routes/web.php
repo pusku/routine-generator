@@ -57,3 +57,29 @@ Route::post('/slot/add',[
 Route::get('/deleteslot/{id}', 'SlotController@deleteSlot')->name('deleteSlot');
 Route::get('/editslot/{id}', 'SlotController@editSlot')->name('editSlot');
 Route::post('/updateslot/{id}', 'SlotController@updateSlot')->name('updateSlot');
+
+//Sections
+Route::get('/sections',[
+    'uses' => 'SectionController@index',
+    'as' => 'sections'
+]);
+Route::post('/section/add',[
+    'uses' => 'SectionController@insertSection',
+    'as' => 'addSection'
+]);
+Route::get('/deletesection/{id}', 'SectionController@deleteSection')->name('deleteSection');
+Route::get('/editsection/{id}', 'SectionController@editSection')->name('editSection');
+Route::post('/updatesection/{id}', 'SectionController@updateSection')->name('updateSection');
+
+//Days
+Route::get('/days',[
+    'uses' => 'DayController@index',
+    'as' => 'days'
+]);
+Route::post('/day/add',[
+    'uses' => 'DayController@insertDay',
+    'as' => 'addDay'
+]);
+Route::get('/deleteday/{id}', 'DayController@deleteDay')->name('deleteDay');
+Route::get('/editday/{id}', 'DayController@editDay')->name('editDay');
+Route::post('/updateday/{id}', 'DayController@updateDay')->name('updateDay');

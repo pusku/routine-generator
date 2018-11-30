@@ -19,7 +19,8 @@ class CreateSlotsTable extends Migration
             $table->string('startTime');
             $table->string('endTime');
             $table->string('type');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

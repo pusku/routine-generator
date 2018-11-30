@@ -10,25 +10,24 @@
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <td>Day\Time</td>
-            <td>Name</td>
-            <td>Email</td>
-            <td>Nerd Level</td>
             <td>Actions</td>
+            <td>Day\Time</td>
+            @foreach($slots as $slot)
+                <td>{{$slot->startTime}}-{{$slot->endTime}}</td>
+            @endforeach
         </tr>
     </thead>
     <tbody>
-   
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-            <a href="" class="btn btn-primary btn-mini"><i class="icon-edit icon-white"></i>E  </a>
-            <a onclick="return confirm('Are you sure you want to delete this item?');" href="" class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i>X</a>
-            </td>
-        </tr>
+        @foreach($days as $day)
+            <tr>
+                <td>
+                <a href="" class="btn btn-primary btn-mini"><i class="icon-edit icon-white"></i>E</a>
+                <a onclick="return confirm('Are you sure you want to delete this item?');" href="" class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i>X</a>
+                </td>
+                <td>{{$day->day}}</td>
+            </tr>
+        @endforeach
+        
     </tbody>
 </table>
 </div>

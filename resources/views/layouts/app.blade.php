@@ -26,8 +26,8 @@
         <li><a href="{{ route('teachers') }}">Teachers</a>
         <li><a href="{{ route('courses') }}">Courses</a></li>
         <li><a href="{{ route('slots') }}">Time Slot</a>
-        <li><a href="{{ route('rooms') }}">Sections</a></li>
-        <li><a href="{{ route('rooms') }}">Teachers</a>
+        <li><a href="{{ route('sections') }}">Sections</a></li>
+        <li><a href="{{ route('days') }}">Days</a></li>
     </ul>
 </nav>
 </div>
