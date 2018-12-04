@@ -30,6 +30,7 @@ class RoutineController extends Controller{
         $courseId = $request->input('courseId');
         $teacherId = $request->input('teacherId');
         $sectionId = $request->input('sectionId');
+        // condtions to assign room, day adn slot will be here
         $assign=array('courseId'=>$courseId,'teacherId'=>$teacherId,'sectionId'=>$sectionId);
         DB::table('routines')->insert($assign);
         $request->session()->flash('alert-success', 'Successfully assigned!');
