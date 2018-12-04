@@ -28,6 +28,7 @@
         <li><a href="{{ route('slots') }}">Time Slot</a>
         <li><a href="{{ route('sections') }}">Sections</a></li>
         <li><a href="{{ route('days') }}">Days</a></li>
+        <li><a href="{{ route('routines') }}">Routines</a></li>
     </ul>
 </nav>
 </div>

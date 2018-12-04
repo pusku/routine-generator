@@ -19,6 +19,7 @@ class CreateRoomsTable extends Migration
             $table->string('type');
             $table->string('maintainer');
             $table->string('phone');
+            $table->string('offday');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

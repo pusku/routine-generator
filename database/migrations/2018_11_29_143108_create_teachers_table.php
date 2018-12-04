@@ -20,6 +20,7 @@ class CreateTeachersTable extends Migration
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->string('initial')->unique();
+            $table->string('offday');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

@@ -15,13 +15,12 @@
                     <table class="table-edit" >
                         <tr>
                             <th>Name</th>
-                            <th>Semester</th>
+                         
                             <th>actions</th>
                         </tr>
-                        @foreach($data as $section)
+                        @foreach($sections as $section)
                         <tr>
                             <td>{{$section->name}}</td>
-                            <td>{{$section->semester}}</td>
                             <td>
                             <a href="{{route('deleteSection',['id'=>$section->id])}}" class="btn btn-danger">X</a>
                             <a href="{{route('editSection',['id'=>$section->id])}}" class="btn btn-info">E</a>
@@ -31,10 +30,8 @@
                     </table>
                 </div>
             </div>
-            <div class="text-center">
-                
-            </div>
-            </div>
+            <div class="text-center">   </div>
+        </div>
         <div class="col-md-5">
             <div class="well">
                 @if(isset($sectionEditInfo)) 
@@ -45,12 +42,8 @@
                 <form action="@if(isset($sectionEditInfo)) {{ route ('updateSection',['id'=>$sectionEditInfo->id]) }} @else {{ route ('addSection') }} @endif" method="post" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="form-group">
-                        <label for="name">Name:</label>
+                        <label for="name">Name & Semester:</label>
                         <input type="text" name="name" class="form-control" id="name" @if(isset($sectionEditInfo)) value='{{$sectionEditInfo->name}}' @endif >
-                    </div>
-                    <div class="form-group">
-                        <label for="type">Semester:</label>
-                        <input type="text" name="semester" class="form-control" id="semester" @if(isset($sectionEditInfo)) value='{{$sectionEditInfo->semester}}' @endif>
                     </div>
                     <button type="submit" class="btn btn-default">
                         @if(isset($sectionEditInfo)) 

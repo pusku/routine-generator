@@ -84,11 +84,15 @@ Route::get('/deleteday/{id}', 'DayController@deleteDay')->name('deleteDay');
 Route::get('/editday/{id}', 'DayController@editDay')->name('editDay');
 Route::post('/updateday/{id}', 'DayController@updateDay')->name('updateDay');
 
-//Assign teacher to course
-Route::post('/day/add',[
-    'uses' => 'CourseController@ctStore',
-    'as' => 'ctStore'
+//Assign teacher to course & section
+Route::get('/routines',[
+    'uses' => 'RoutineController@index',
+    'as' => 'routines'
 ]);
-Route::get('/deleteday/{id}', 'CourseController@deleteDay')->name('deleteDay');
-Route::get('/editday/{id}', 'CourseController@editDay')->name('editDay');
-Route::post('/updateday/{id}', 'CourseController@ctUpdate')->name('ctUpdate');
+Route::post('/routine/add',[
+    'uses' => 'RoutineController@insertRoutine',
+    'as' => 'addRoutine'
+]);
+Route::get('/deletesroutine/{id}', 'RoutineController@deleteRoutine')->name('deleteRoutine');
+Route::get('/editroutine/{id}', 'RoutineController@editRoutine')->name('editRoutine');
+Route::post('/updateroutine/{id}', 'RoutineController@updateRoutine')->name('updateRoutine');

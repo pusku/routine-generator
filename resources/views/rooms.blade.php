@@ -18,6 +18,7 @@
                             <th>Type</th>
                             <th>Maintainer</th>
                             <th>Phone</th>
+                            <th>Off Day</th>
                             <th>actions</th>
                         </tr>
                         @foreach($data as $room)
@@ -26,6 +27,7 @@
                             <td>{{$room->type}}</td>
                             <td>{{$room->maintainer}}</td>
                             <td>{{$room->phone}}</td>
+                            <td>{{$room->offday}}</td>
                             <td>
                             <a href="{{route('deleteRoom',['id'=>$room->id])}}" class="btn btn-danger">X</a>
                             <a href="{{route('editRoom',['id'=>$room->id])}}" class="btn btn-info">E</a>
@@ -63,6 +65,10 @@
                     <div class="form-group">
                         <label for="phone">Phone:</label>
                         <input type="text" name="phone" class="form-control" id="phone" @if(isset($roomEditInfo)) value='{{$roomEditInfo->phone}}' @endif>
+                    </div>
+                    <div class="form-group">
+                        <label for="offday">Off Day:</label>
+                        <input type="text" name="offday" class="form-control" id="offday" @if(isset($roomEditInfo)) value='{{$roomEditInfo->offday}}' @endif>
                     </div>
                     <button type="submit" class="btn btn-default">
                         @if(isset($roomEditInfo)) 

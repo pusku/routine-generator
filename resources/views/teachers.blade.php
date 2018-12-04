@@ -19,6 +19,7 @@
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Initial</th>
+                            <th>Off Day</th>
                             <th>actions</th>
                         </tr>
                         @foreach($data as $teacher)
@@ -28,6 +29,7 @@
                             <td>{{$teacher->email}}</td>
                             <td>{{$teacher->phone}}</td>
                             <td>{{$teacher->initial}}</td>
+                            <td>{{$teacher->offday}}</td>
                             <td>
                                 <a href="{{route('deleteTeacher',['id'=>$teacher->id])}}" class="btn btn-danger">X</a>
                                 <a href="{{route('editTeacher',['id'=>$teacher->id])}}" class="btn btn-info">E</a>
@@ -69,6 +71,10 @@
                     <div class="form-group">
                         <label for="initial">Initial:</label>
                         <input type="text" name="initial" class="form-control" id="initial" @if(isset($teacherEditInfo)) value='{{$teacherEditInfo->initial}}' @endif>
+                    </div>
+                    <div class="form-group">
+                        <label for="initial">Off Day:</label>
+                        <input type="text" name="offday" class="form-control" id="offday" @if(isset($teacherEditInfo)) value='{{$teacherEditInfo->offday}}' @endif>
                     </div>
                     <button type="submit" class="btn btn-default">
                         @if(isset($teacherEditInfo)) 

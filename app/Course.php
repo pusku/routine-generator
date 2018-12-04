@@ -3,13 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Section;
-class Course extends Model
-{
+class Course extends Model{
     protected $table = 'courses';
-    public $timestamps = false;
-    public function section()
-    {
-        return $this->hasMany('App\Section','semester','semester');
+    public function routine(){
+        return $this->hasMany('App\Routine', 'id', 'courseId');
     }
 }

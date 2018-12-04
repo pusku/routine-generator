@@ -24,13 +24,15 @@ class TeacherController extends Controller{
             'email'=>'nullable|max:255|unique:teachers',
             'phone'=>'required|max:255|unique:teachers',
             'initial'=>'required|max:255|unique:teachers',
+            'offday'=>'nullable|max:255',
         ]);
         $teacherId = $request->input('teacherId');
         $name = $request->input('name');
         $email = $request->input('email');
         $phone = $request->input('phone');
         $initial = $request->input('initial');
-        $data=array('teacherId'=>$teacherId,'name'=>$name,'email'=>$email,'phone'=>$phone,'initial'=>$initial);
+        $offday = $request->input('offday');
+        $data=array('teacherId'=>$teacherId,'name'=>$name,'email'=>$email,'phone'=>$phone,'initial'=>$initial,'offday'=>$offday);
         DB::table('teachers')->insert($data);
         $request->session()->flash('alert-success', 'Teacher was successful added!');
         return redirect()->route("teachers");
@@ -55,7 +57,8 @@ class TeacherController extends Controller{
         $email = $request->input('email');
         $phone = $request->input('phone');
         $initial = $request->input('initial');
-        $data=array('teacherId'=>$teacherId,'name'=>$name,'email'=>$email,'phone'=>$phone,'initial'=>$initial);
+        $offday = $request->input('offday');
+        $data=array('teacherId'=>$teacherId,'name'=>$name,'email'=>$email,'phone'=>$phone,'initial'=>$initial,'offday'=>$offday);
         Teacher::where('id',$id)->update($data);
         $request->session()->flash('alert-success', 'Teacher was successful Updated!');
         return redirect()->route("teachers");

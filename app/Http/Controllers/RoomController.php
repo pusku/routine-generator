@@ -24,12 +24,14 @@ class RoomController extends Controller{
             'type'=>'required|max:255',
             'maintainer'=>'nullable|max:255',
             'phone'=>'required|max:255|unique:rooms',
+            'offday'=>'nullable|max:255',
         ]);
         $name = $request->input('name');
         $type = $request->input('type');
         $maintainer = $request->input('maintainer');
         $phone = $request->input('phone');
-        $data=array('name'=>$name,'type'=>$type,'maintainer'=>$maintainer,'phone'=>$phone);
+        $offday = $request->input('offday');
+        $data=array('name'=>$name,'type'=>$type,'maintainer'=>$maintainer,'phone'=>$phone,'offday'=>$offday);
         DB::table('rooms')->insert($data);
         $request->session()->flash('alert-success', 'Room was successful added!');
         return redirect()->route("rooms");
@@ -53,7 +55,8 @@ class RoomController extends Controller{
         $type = $request->input('type');
         $maintainer = $request->input('maintainer');
         $phone = $request->input('phone');
-        $data=array('name'=>$name,'type'=>$type,'maintainer'=>$maintainer,'phone'=>$phone);
+        $offday = $request->input('offday');
+        $data=array('name'=>$name,'type'=>$type,'maintainer'=>$maintainer,'phone'=>$phone,'offday'=>$offday);
         Room::where('id',$id)->update($data);
         $request->session()->flash('alert-success', 'Room was successful Updated!');
         return redirect()->route("rooms");

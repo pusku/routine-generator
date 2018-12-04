@@ -18,7 +18,7 @@ class CreateCoursesTable extends Migration
             $table->string('name')->unique();
             $table->string('type');
             $table->string('credit');
-            $table->string('semester');
+            // $table->string('semester');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });
