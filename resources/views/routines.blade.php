@@ -24,9 +24,12 @@
                         </tr>
                         @foreach($routines as $routine)
                         <tr>
-                            <th></th>
-                            <td></td>
-                            <td></td>
+                            <td>{{$routine->course->name}}</td>
+                            <td>{{$routine->section->name}}</td>
+                            <td>{{$routine->teacher->name}}</td>
+                            <td>{{$routine->room->name}}</td>
+                            <td>{{$routine->day->name}}</td>
+                            <td>{{$routine->slot->name}}</td>
                             <td>
                             <a href="{{route('deleteRoutine',['id'=>$routine->id])}}" class="btn btn-danger">X</a>
                             <a href="{{route('editRoutine',['id'=>$routine->id])}}" class="btn btn-info">E</a>
@@ -40,11 +43,7 @@
         </div>
         <div class="col-md-5">
             <div class="well">
-                @if(isset($assignEditInfo)) 
-                    <h4>Update teacher assigned to this course</h4>
-                @else
-                    <h4>Assign Teacher to this Course </h4>
-                @endif
+                    <h4>Assign Teacher Course to a Section </h4>
                 <form action="@if(isset($routineEditInfo)) {{ route ('updateRoutine',['id'=>$routineEditInfo->id]) }} @else {{ route ('addRoutine') }} @endif" method="post" enctype="multipart/form-data">
                     {{csrf_field()}}
                     @if(isset($routineEditInfo))
@@ -84,11 +83,7 @@
                             </select>
                         </div>
                         <button type="submit" class="btn btn-default">
-                            @if(isset($ctEditInfo)) 
-                                <h4>Update teacher assigned to this course</h4>
-                            @else
-                                <h4>Assign Teacher to this Course </h4>
-                            @endif
+                            <h4>Assign Teacher & course to this Section</h4>
                         </button>
                     </form>
                 </div>

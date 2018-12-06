@@ -12,6 +12,10 @@ class DayController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
         $data['data'] = DB::table('days')->get();
         $dayData['dayData']=DB::table('days')->get();

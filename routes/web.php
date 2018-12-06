@@ -2,7 +2,7 @@
 
 //Landing Page
 Route::get('/',[
-    'uses' => 'HomeController@index',
+    'uses' => 'HomeController@admin',
     'as' => '/'
 ]);
 
@@ -96,3 +96,36 @@ Route::post('/routine/add',[
 Route::get('/deletesroutine/{id}', 'RoutineController@deleteRoutine')->name('deleteRoutine');
 Route::get('/editroutine/{id}', 'RoutineController@editRoutine')->name('editRoutine');
 Route::post('/updateroutine/{id}', 'RoutineController@updateRoutine')->name('updateRoutine');
+
+
+Route::get('/user/create',[
+    'uses' => 'RegistrationController@create',
+    'as' => 'users'
+]);
+
+Route::post('/user/store',[
+    'uses' => 'RegistrationController@store',
+    'as' => 'user_store'
+]);
+Route::get('/user/delete/{id}',[
+    'uses' => 'RegistrationController@destroy',
+    'as' => 'user_delete'
+]);
+
+Route::get('/user/edit/{id}',[
+    'uses' => 'RegistrationController@edit',
+    'as' => 'user_edit'
+]);
+Route::post('/user/update/{id}',[
+    'uses' => 'RegistrationController@update',
+    'as' => 'user_update'
+]);
+
+Route::get('/admin', [
+
+    'uses'=>'HomeController@admin',
+    'as'=>'admin'
+
+]);
+
+Auth::routes();

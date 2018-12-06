@@ -19,7 +19,7 @@
 
 <nav class="navbar navbar-inverse">
     <div class="navbar-header">
-        <a class="navbar-brand" href="{{ route('/') }}">Admin Panel</a>
+        <a class="navbar-brand" href="{{ route('admin') }}">Routine Generator</a>
     </div>
     <ul class="nav navbar-nav">
         <li><a href="{{ route('rooms') }}">Rooms</a></li>
@@ -29,7 +29,18 @@
         <li><a href="{{ route('sections') }}">Sections</a></li>
         <li><a href="{{ route('days') }}">Days</a></li>
         <li><a href="{{ route('routines') }}">Routines</a></li>
+        <li><a href="{{ route('users') }}">Users</a></li>
+        @if(Auth::check())
+        <li>
+            <a href="{{route('logout')}}" class="" onclick="event.preventDefault();document.getElementById('lo').submit();">Logout</a>
+            <form action="{{route('logout')}}" method="post" id="lo" style="display:none">
+                {{csrf_field()}}
+            </form>
+        </li>
+        @endif 
     </ul>
+   
+
 </nav>
 </div>
 <div class="wrap">

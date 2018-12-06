@@ -15,6 +15,10 @@ class SectionController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
         $sections = Section:: get();
         // $teachers = Teacher:: get();
@@ -58,5 +62,5 @@ class SectionController extends Controller{
         Section::where('id',$id)->update($data);
         $request->session()->flash('alert-success', 'Sections was successful Updated!');
         return redirect()->route("sections");
-        }
+    }
 }

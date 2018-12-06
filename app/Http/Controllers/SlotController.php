@@ -12,6 +12,11 @@ class SlotController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
         $data['data'] = DB::table('slots')->get();
         $slotData['slotData']=DB::table('slots')->get();

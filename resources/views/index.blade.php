@@ -10,27 +10,35 @@
     <div class="alert alert-info">{{ Session::get('message') }}</div>
 @endif
 <table class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <td>Actions</td>
-            <td>Day\Time</td>
-            @foreach($slots as $slot)
-                <td>{{$slot->startTime}}-{{$slot->endTime}}</td>
-            @endforeach
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($days as $day)
-            <tr>
-                <td>
-                <a href="" class="btn btn-primary btn-mini"><i class="icon-edit icon-white"></i>E</a>
-                <a onclick="return confirm('Are you sure you want to delete this item?');" href="" class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i>X</a>
-                </td>
-                <td>{{$day->day}}</td>
-            </tr>
-        @endforeach
-        
-    </tbody>
+    @foreach($days as $day)
+    <tr>
+        <th style="text-align:center; color:red;" colspan="6">{{$day->day}}</th>
+    </tr>
+    @foreach($slots as $slot)
+    <tr>
+      
+        <th style="text-align:center; color:blue" colspan="4">{{$slot->startTime}}-{{$slot->endTime}}</th>
+    </tr>
+    <tr>
+    <th style="color:green">Room</th>
+    <th style="color:green">Course</th>
+    <th style="color:green">Teacher</th>
+    <th style="color:green">Section</th>
+  </tr>
+  @foreach($rooms as $room)
+  @foreach($routines as $routine)
+  @if($day->id==$routine->dayId && $slot->id==$routine->slotId && $room->id==$routine->roomId)
+  <tr>
+    <td>{{$room->name}}</td>
+    <td>{{$routine->course->name}}</td>
+    <td>{{$routine->teacher->name}}</td>
+    <td>{{$routine->section->name}}</td>
+    </tr>
+  @endif
+    @endforeach
+@endforeach
+  @endforeach
+    @endforeach
 </table>
 </div>
 @endsection
