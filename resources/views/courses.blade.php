@@ -50,8 +50,12 @@
                     </div>
                     <div class="form-group">
                         <label for="type">Type:</label>
-                        <input type="text" name="type" class="form-control" id="type" @if(isset($courseEditInfo)) value='{{$courseEditInfo->type}}' @endif>
-                    </div>
+                        <select name="type" class="chosen-select-group form-control"  data-placeholder="Choose type..." >
+                       
+                       <option value="Theory">Theory</option>
+                       <option value="Lab">Lab</option>
+           </select>
+           </div>
                     <div class="form-group">
                         <label for="credit">Credit:</label>
                         <input type="text" name="credit" class="form-control" id="credit" @if(isset($courseEditInfo)) value='{{$courseEditInfo->credit}}' @endif>

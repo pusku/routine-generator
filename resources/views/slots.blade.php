@@ -62,7 +62,14 @@
                     </div>
                     <div class="form-group">
                         <label for="type">Type:</label>
-                        <input type="text" name="type" class="form-control" id="type" @if(isset($slotEditInfo)) value='{{$slotEditInfo->type}}' @endif>
+                        
+                        <select name="type" class="chosen-select-group form-control"  data-placeholder="Choose type..." >
+                            
+                                    <option value="Class">Class</option>
+                                    <option value="Break">Break</option>
+                           
+                        </select>
+
                     </div>
                     <button type="submit" class="btn btn-default">
                     @if(isset($slotEditInfo)) 

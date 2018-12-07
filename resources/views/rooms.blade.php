@@ -16,8 +16,7 @@
                         <tr>
                             <th>Name</th>
                             <th>Type</th>
-                            <th>Maintainer</th>
-                            <th>Phone</th>
+                            
                             <th>Off Day</th>
                             <th>actions</th>
                         </tr>
@@ -25,8 +24,7 @@
                         <tr>
                             <td>{{$room->name}}</td>
                             <td>{{$room->type}}</td>
-                            <td>{{$room->maintainer}}</td>
-                            <td>{{$room->phone}}</td>
+                            
                             <td>{{$room->offday}}</td>
                             <td>
                             <a href="{{route('deleteRoom',['id'=>$room->id])}}" class="btn btn-danger">X</a>
@@ -56,23 +54,20 @@
                     </div>
                     <div class="form-group">
                         <label for="type">Type:</label>
-                        <input type="text" name="type" class="form-control" id="type" @if(isset($roomEditInfo)) value='{{$roomEditInfo->type}}' @endif>
-                    </div>
-                    <div class="form-group">
-                        <label for="maintainer">Maintainer:</label>
-                        <input type="text" name="maintainer" class="form-control" id="maintainer" @if(isset($roomEditInfo)) value='{{$roomEditInfo->maintainer}}' @endif>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone:</label>
-                        <input type="text" name="phone" class="form-control" id="phone" @if(isset($roomEditInfo)) value='{{$roomEditInfo->phone}}' @endif>
+                        <select name="type" class="chosen-select-group form-control"  data-placeholder="Choose type..." >
+                       
+                                    <option value="Theory">Theory</option>
+                                    <option value="Lab">Lab</option>
+                                    <option value="Meeting">Meeting</option>
+                        </select>
                     </div>
                     <div class="form-group">
                             <label for="offday">Off Day:</label>
                             <select name="offday" class="chosen-select-member form-control"  data-placeholder="Choose offday...">
                             @foreach ($days as $day)
                                     <option value="{{ $day->id }}" > {{ $day->day }}</option>
-                                @endforeach 
-                                
+                            @endforeach   
+                            <option value="None" > None</option>
                             </select>
                             </div>
                     <button type="submit" class="btn btn-default">

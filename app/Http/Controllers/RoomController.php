@@ -28,16 +28,16 @@ class RoomController extends Controller{
         $this->validate($request,[
             'name'=>'required|max:255',
             'type'=>'required|max:255',
-            'maintainer'=>'nullable|max:255',
-            'phone'=>'required|max:255|unique:rooms',
+            // 'maintainer'=>'nullable|max:255',
+            // 'phone'=>'required|max:255|unique:rooms',
             'offday'=>'nullable|max:255',
         ]);
         $name = $request->input('name');
         $type = $request->input('type');
-        $maintainer = $request->input('maintainer');
-        $phone = $request->input('phone');
+        // $maintainer = $request->input('maintainer');
+        // $phone = $request->input('phone');
         $offday = $request->input('offday');
-        $data=array('name'=>$name,'type'=>$type,'maintainer'=>$maintainer,'phone'=>$phone,'offday'=>$offday);
+        $data=array('name'=>$name,'type'=>$type,'offday'=>$offday);
         DB::table('rooms')->insert($data);
         $request->session()->flash('alert-success', 'Room was successful added!');
         return redirect()->route("rooms");
@@ -47,8 +47,9 @@ class RoomController extends Controller{
         $data = DB::table('rooms')->get();
         $roomData=DB::table('rooms')->get();
         $roomEditInfo = Room::find($id);
+        $days = Day:: get();
         // dd($groupData);
-        return view('rooms',compact('data','roomData','roomEditInfo'));
+        return view('rooms',compact('data','roomData','roomEditInfo','days'));
     }
 
     public function deleteRoom($id){
@@ -59,10 +60,10 @@ class RoomController extends Controller{
     public function updateRoom(Request $request, $id){
         $name = $request->input('name');
         $type = $request->input('type');
-        $maintainer = $request->input('maintainer');
-        $phone = $request->input('phone');
+        // $maintainer = $request->input('maintainer');
+        // $phone = $request->input('phone');
         $offday = $request->input('offday');
-        $data=array('name'=>$name,'type'=>$type,'maintainer'=>$maintainer,'phone'=>$phone,'offday'=>$offday);
+        $data=array('name'=>$name,'type'=>$type,'offday'=>$offday);
         Room::where('id',$id)->update($data);
         $request->session()->flash('alert-success', 'Room was successful Updated!');
         return redirect()->route("rooms");

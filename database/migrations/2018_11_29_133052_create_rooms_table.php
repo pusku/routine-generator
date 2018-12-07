@@ -17,9 +17,9 @@ class CreateRoomsTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->string('type');
-            $table->string('maintainer');
-            $table->string('phone');
-            $table->string('offday');
+            // $table->string('maintainer');
+            // $table->string('phone');
+            $table->string('offday')->nullable();;
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

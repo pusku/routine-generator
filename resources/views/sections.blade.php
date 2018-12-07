@@ -42,8 +42,8 @@
                 <form action="@if(isset($sectionEditInfo)) {{ route ('updateSection',['id'=>$sectionEditInfo->id]) }} @else {{ route ('addSection') }} @endif" method="post" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="form-group">
-                        <label for="name">Name & Semester:</label>
-                        <input type="text" name="name" class="form-control" id="name" @if(isset($sectionEditInfo)) value='{{$sectionEditInfo->name}}' @endif >
+                        <label for="name">Semester & Section:</label>
+                        <input type="text" name="name" class="form-control" id="name" @if(isset($sectionEditInfo)) value='{{$sectionEditInfo->name}}' @endif placeholder="Example 1A , here A1 means A section of 1st Semester">
                     </div>
                     <button type="submit" class="btn btn-default">
                         @if(isset($sectionEditInfo)) 

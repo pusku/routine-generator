@@ -54,7 +54,7 @@
                     {{csrf_field()}}
                     <div class="form-group">
                         <label for="teacherId">Teacher ID:</label>
-                        <input type="text" name="teacherId" class="form-control" id="teacherId" @if(isset($teacherEditInfo)) value='{{$teacherEditInfo->teacherId}}' @endif >
+                        <input type="text" name="teacherId" class="form-control" id="teacherId" @if(isset($teacherEditInfo)) value='{{$teacherEditInfo->teacherId}}' @endif placeholder = "Nullable">
                     </div>
                     <div class="form-group">
                         <label for="name">Name:</label>
@@ -62,11 +62,11 @@
                     </div>
                     <div class="form-group">
                         <label for="email">Email:</label>
-                        <input type="text" name="email" class="form-control" id="email" @if(isset($teacherEditInfo)) value='{{$teacherEditInfo->email}}' @endif>
+                        <input type="text" name="email" class="form-control" id="email" @if(isset($teacherEditInfo)) value='{{$teacherEditInfo->email}}' @endif placeholder = "Nullable">
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone:</label>
-                        <input type="text" name="phone" class="form-control" id="phone" @if(isset($teacherEditInfo)) value='{{$teacherEditInfo->phone}}' @endif>
+                        <input type="text" name="phone" class="form-control" id="phone" @if(isset($teacherEditInfo)) value='{{$teacherEditInfo->phone}}' @endif placeholder = "Nullable">
                     </div>
                     <div class="form-group">
                         <label for="initial">Initial:</label>
@@ -79,7 +79,7 @@
                             @foreach ($days as $day)
                                     <option value="{{ $day->id }}" > {{ $day->day }}</option>
                                 @endforeach 
-                                
+                                <option value="None" > None</option>
                             </select>
                             </div>
                     <button type="submit" class="btn btn-default">

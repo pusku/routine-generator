@@ -25,10 +25,10 @@ class TeacherController extends Controller{
     }
     public function insertTeacher(Request $request){
         $this->validate($request,[
-            'teacherId'=>'required|max:255|unique:teachers',
+            'teacherId'=>'nullable|max:255|unique:teachers',
             'name'=>'required|max:255',
             'email'=>'nullable|max:255|unique:teachers',
-            'phone'=>'required|max:255|unique:teachers',
+            'phone'=>'nullable|max:255|unique:teachers',
             'initial'=>'required|max:255|unique:teachers',
             'offday'=>'nullable|max:255',
         ]);
