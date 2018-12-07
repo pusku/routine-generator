@@ -149,6 +149,15 @@ class RoutineController extends Controller{
         // $days['days'] = DB::table('days')->get();
         // $slots['slots'] = DB::table('slots')->get();
         // $rooms['rooms'] = DB::table('rooms')->get();
+        if (count($days)==0){
+            echo "You have to add room first";
+        }
+        if (count($slots)==0){
+            echo "you have to add slot first";
+        }
+        if (count($rooms)==0){
+            echo "you have to add room before you can generate routine";
+        }
         if (count($routines)>0){
             if($courseCounter == $one){
                 echo 'You can not assign cause this course is alrady 2 times available in this week for this section';
