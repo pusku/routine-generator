@@ -65,7 +65,7 @@
                             <label for="offday">Off Day:</label>
                             <select name="offday" class="chosen-select-member form-control"  data-placeholder="Choose offday...">
                             @foreach ($days as $day)
-                                    <option value="{{ $day->id }}" > {{ $day->day }}</option>
+                                    <option value="{{ $day->day }}" > {{ $day->day }}</option>
                             @endforeach   
                             <option value="None" > None</option>
                             </select>
