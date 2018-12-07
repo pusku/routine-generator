@@ -28,8 +28,8 @@
                             <td>{{$routine->section->name}}</td>
                             <td>{{$routine->teacher->name}}</td>
                             <td>{{$routine->room->name}}</td>
-                            <td>{{$routine->day->name}}</td>
-                            <td>{{$routine->slot->name}}</td>
+                            <td>{{$routine->day->day}}</td>
+                            <td>{{$routine->slot->slotNo}}</td>
                             <td>
                             <a href="{{route('deleteRoutine',['id'=>$routine->id])}}" class="btn btn-danger">X</a>
                             <a href="{{route('editRoutine',['id'=>$routine->id])}}" class="btn btn-info">E</a>
