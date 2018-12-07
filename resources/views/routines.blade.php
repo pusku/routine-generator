@@ -32,7 +32,7 @@
                             <td>{{$routine->slot->slotNo}}</td>
                             <td>
                             <a href="{{route('deleteRoutine',['id'=>$routine->id])}}" class="btn btn-danger">X</a>
-                            <a href="{{route('editRoutine',['id'=>$routine->id])}}" class="btn btn-info">E</a>
+                            
                             </td>
                         </tr>
                         @endforeach
@@ -44,20 +44,15 @@
         <div class="col-md-5">
             <div class="well">
                     <h4>Assign Teacher Course to a Section </h4>
-                <form action="@if(isset($routineEditInfo)) {{ route ('updateRoutine',['id'=>$routineEditInfo->id]) }} @else {{ route ('addRoutine') }} @endif" method="post" enctype="multipart/form-data">
+                <form action="{{ route ('addRoutine') }}" method="post" enctype="multipart/form-data">
                     {{csrf_field()}}
-                    @if(isset($routineEditInfo))
-                            <input type="hidden" name="previouslySelectedRoutineId" value="{{$routineEditInfo->id}}">
-                        @endif
                         <div class="form-group">
                             <label for="">Select the course:</label>
                             <select name="courseId" class="chosen-select-group form-control"  data-placeholder="Choose course..." >
                             @foreach ($courses as $course)
                                     <option value="{{ $course->id }}" > {{ $course->name }} </option>
                                 @endforeach 
-                                @if(isset($ctEditInfo))
-                                    <option value="{{ $routineEditInfo->courseId }}" selected> {{ $routineEditInfo->courseId }} </option>
-                                @endif
+                                
                             </select>
                         </div>
                         <div class="form-group">
@@ -66,9 +61,7 @@
                             @foreach ($sections as $section)
                                     <option value="{{ $section->id }}" > {{ $section->name }} </option>
                                 @endforeach 
-                                @if(isset($gmEditInfo))
-                                    <option value="{{ $routineEditInfo->sectionId }}" selected> {{ $routineEditInfo->section->name }} </option>
-                                @endif
+                                
                             </select>
                         </div>
                         <div class="form-group">
@@ -77,9 +70,7 @@
                             @foreach ($teachers as $teacher)
                                     <option value="{{ $teacher->id }}" > {{ $teacher->name }}</option>
                                 @endforeach 
-                                @if(isset($ctEditInfo))
-                                    <option value="{{ $assiroutineEditInfognEditInfo->teacherId }}" selected> {{ $routineEditInfo->teacherId }} </option>
-                                @endif
+                                
                             </select>
                         </div>
                         <button type="submit" class="btn btn-default">
