@@ -43,6 +43,7 @@ class RoutineController extends Controller{
         $offday = Teacher::select('offday')
         ->where('id','=', $id)
         ->first();
+       // dd($offday);
         return $offday;
     }
 
@@ -141,6 +142,7 @@ class RoutineController extends Controller{
         $slots=Slot:: get();
         $rooms=Room:: get();
         $teacherDayoff = RoutineController::teacherDayoff($teacherId);
+        //dd();
         $one=1;
         $two=2;
         $courseCounter = RoutineController::courseClassCounter($courseId, $sectionId);
@@ -162,13 +164,15 @@ class RoutineController extends Controller{
                             if($isThereAlreadyAclass == $one){
                                 break;
                             }
-                            else if($teacherDayoff == $day->day){
+                            else if($teacherDayoff->offday == $day->day){
                                 break;
                             }
                             else if($courseForSectionPerDay == $one){
                                 break;
                             }
                             else if($counter == $one){
+                                break;
+                            }else if($item->teacherId == $teacherId && $item->dayId == $day->id && $item->slotId == $slot->id){
                                 break;
                             }
                             else{
@@ -190,6 +194,10 @@ class RoutineController extends Controller{
             foreach($days as $day){
                 foreach($slots as $slot){
                     foreach($rooms as $room){
+                       // dd($day->day);
+                        if($teacherDayoff->offday == $day->day){
+                            break;
+                        }else{
                         $roomId=$room->id;
                         $dayId=$day->id;
                         $slotId=$slot->id;                    
@@ -197,7 +205,7 @@ class RoutineController extends Controller{
                         DB::table('routines')->insert($assign);
                         $request->session()->flash('alert-success', 'Successfully assigned!');
                         return redirect()->route("routines");
-                    }                        
+                    }   }                     
                 }
             }
         }

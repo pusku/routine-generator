@@ -72,10 +72,16 @@
                         <label for="initial">Initial:</label>
                         <input type="text" name="initial" class="form-control" id="initial" @if(isset($teacherEditInfo)) value='{{$teacherEditInfo->initial}}' @endif>
                     </div>
+                   
                     <div class="form-group">
-                        <label for="initial">Off Day:</label>
-                        <input type="text" name="offday" class="form-control" id="offday" @if(isset($teacherEditInfo)) value='{{$teacherEditInfo->offday}}' @endif>
-                    </div>
+                            <label for="offday">Off Day:</label>
+                            <select name="offday" class="chosen-select-member form-control"  data-placeholder="Choose offday...">
+                            @foreach ($days as $day)
+                                    <option value="{{ $day->id }}" > {{ $day->day }}</option>
+                                @endforeach 
+                                
+                            </select>
+                            </div>
                     <button type="submit" class="btn btn-default">
                         @if(isset($teacherEditInfo)) 
                             <h4>Update Teacher</h4>

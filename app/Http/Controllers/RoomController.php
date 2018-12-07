@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Session;
 use App\Room;
+use App\Day;
 use DB;
 class RoomController extends Controller{
     /**
@@ -17,9 +18,10 @@ class RoomController extends Controller{
         $this->middleware('auth');
     }
     public function index(){
-        $data['data'] = DB::table('rooms')->get();
-        $roomData['roomData']=DB::table('rooms')->get();
-        return view('rooms',$data,$roomData);
+        $data = DB::table('rooms')->get();
+        $roomData=DB::table('rooms')->get();
+        $days = Day:: get();
+        return view('rooms',compact('data','roomData','days'));
     }
    
     public function insertRoom(Request $request){

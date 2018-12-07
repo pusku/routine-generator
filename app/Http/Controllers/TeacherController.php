@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Session;
 use App\Teacher;
 use DB;
+use App\Day;
 class TeacherController extends Controller{
     /**
      * Display a listing of the resource.
@@ -17,9 +18,10 @@ class TeacherController extends Controller{
         $this->middleware('auth');
     }
     public function index(){
-        $data['data'] = DB::table('teachers')->get();
-        $teacherData['teacherData']=DB::table('teachers')->get();
-        return view('teachers',$data,$teacherData);
+        $data = DB::table('teachers')->get();
+        $teacherData=DB::table('teachers')->get();
+        $days = Day::get();
+        return view('teachers',compact('data','teacherData','days'));
     }
     public function insertTeacher(Request $request){
         $this->validate($request,[

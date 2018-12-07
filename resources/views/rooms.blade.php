@@ -67,9 +67,14 @@
                         <input type="text" name="phone" class="form-control" id="phone" @if(isset($roomEditInfo)) value='{{$roomEditInfo->phone}}' @endif>
                     </div>
                     <div class="form-group">
-                        <label for="offday">Off Day:</label>
-                        <input type="text" name="offday" class="form-control" id="offday" @if(isset($roomEditInfo)) value='{{$roomEditInfo->offday}}' @endif>
-                    </div>
+                            <label for="offday">Off Day:</label>
+                            <select name="offday" class="chosen-select-member form-control"  data-placeholder="Choose offday...">
+                            @foreach ($days as $day)
+                                    <option value="{{ $day->id }}" > {{ $day->day }}</option>
+                                @endforeach 
+                                
+                            </select>
+                            </div>
                     <button type="submit" class="btn btn-default">
                         @if(isset($roomEditInfo)) 
                             <h4>Update Room </h4>
