@@ -1,2 +1,3 @@
 ## Automated Routine Generator
-- In implementation phase
+- It's functional
+- But still need to improve more
