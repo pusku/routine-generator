@@ -147,7 +147,8 @@ class RoutineController extends Controller{
     public function lastClassofTeacher($dayId,$teacherId){
         $lastClassofTeacher = Routine::select('slotId')
         ->where('dayId','=', $dayId)->where('teacherId', '=', $teacherId)->orderBy('slotId', 'desc')->first();
-      // dd($lastClassofTeacher);
+    //   dd($lastClassofTeacher);
+      //dd($lastClassofTeacher->slotId);
         return $lastClassofTeacher;
 
     }
@@ -205,15 +206,9 @@ class RoutineController extends Controller{
                     foreach($rooms as $room){
                         $isTisTeacherHasClassinThisSlot = RoutineController::isTisTeacherHasClassinThisSlot($teacherId,$slot->id,$day->id);
                         $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slot->id,$day->id);
-                        $aa = Routine::select('teacherId')->where('teacherId','=', $teacherId)->first();
-                        // dd($lastClassofTeacher->slotId);
-                        if(!empty($aa) && !empty($slot->id+1)){
-                            
-                            if($lastClassofTeacher->slotId == $slot->id-1 || $lastClassofTeacher->slotId == $slot->id+1){
-                                
-                                break;
-                            }
-                        }else if($isThereAlreadyAclass == $one){
+                        $aa = Routine::select('teacherId')->where('teacherId','=', $teacherId)->where('dayId','=',$day->id)->first();
+                        //dd($lastClassofTeacher->slotId);
+                        if($isThereAlreadyAclass == $one){
                             break;
                         }
                         foreach ($routines as $item) {
@@ -229,7 +224,14 @@ class RoutineController extends Controller{
                             }
                             else if($counter == $one){
                                 break;
-                            }else if($classType->type == "Lab"){
+                            }else if(is_null($aa) || is_null($slot->id+1)){
+                            
+                                break;
+                            }else if($lastClassofTeacher->slotId == $slot->id-1 || $lastClassofTeacher->slotId == $slot->id+1){
+                                    
+                                    break;
+                                }
+                            else if($classType->type == "Lab"){
                                 $b=0;
                                 while($b<2){
                                     
@@ -382,7 +384,7 @@ class RoutineController extends Controller{
                             DB::table('routines')->insert($assign);
                             $request->session()->flash('alert-success', 'Successfully assigned!');
                             return redirect()->route("routines");
-                    }   }                     
+                    }  }                     
                 }
             }
         }
