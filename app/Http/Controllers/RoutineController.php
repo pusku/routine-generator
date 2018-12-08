@@ -215,6 +215,11 @@ class RoutineController extends Controller{
                                         $slotId=$slot->id;
                                     }if($b==1){
                                         $slotId=$slot->id+1;
+                                        $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slotId,$day->id);
+                                        while(!empty($isThereAlreadyAclass)){
+                                            $slotId+=$slot->id+1;
+                                            $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slotId,$day->id);
+                                        }    
                                     }
                                     $assign=array('courseId'=>$courseId,'teacherId'=>$teacherId,'sectionId'=>$sectionId,'roomId'=>$roomId,'dayId'=>$dayId,'slotId'=>$slotId);
                                     DB::table('routines')->insert($assign);
@@ -268,48 +273,51 @@ class RoutineController extends Controller{
                         else if($classType->type == "Lab"){
                             $b=0;
                             while($b<2){
-                            $roomId=$room->id;
-                            $dayId=$day->id;
-                            //dd($slot->id);
-                            if($b==0){
-                            $slotId=$slot->id;
-                            }if($b==1){
-                                $slotId=$slot->id+1;
-                            }
-                            $assign=array('courseId'=>$courseId,'teacherId'=>$teacherId,'sectionId'=>$sectionId,'roomId'=>$roomId,'dayId'=>$dayId,'slotId'=>$slotId);
-                            DB::table('routines')->insert($assign);
-                           // $slotId++;
-                            $b++;
+                                $roomId=$room->id;
+                                $dayId=$day->id;
+                                if($b==0){
+                                    $slotId=$slot->id;
+                                }if($b==1){
+                                    $slotId=$slot->id+1;
+                                    $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slotId,$day->id);
+                                    while(!empty($isThereAlreadyAclass)){
+                                        $slotId+=$slot->id+1;
+                                        $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slotId,$day->id);
+                                    }    
+                                }
+                                $assign=array('courseId'=>$courseId,'teacherId'=>$teacherId,'sectionId'=>$sectionId,'roomId'=>$roomId,'dayId'=>$dayId,'slotId'=>$slotId);
+                                DB::table('routines')->insert($assign);
+                                $b++;
                             }
                             return redirect()->route("routines");
-                        }
-                        else if($classType->type == "Theory"){
+                        }else if($classType->type == "Theory"){
                             $b=0;
                             while($b<2){
-                            $roomId=$room->id;
-                            $slotId=$slot->id;
-                            
-                            //dd($slot->id);
-                            if($b==0){
-                                $dayId=$day->id;
-                            }if($b==1){
-                                $dayId=$day->id+1;
-                            }
-                            $assign=array('courseId'=>$courseId,'teacherId'=>$teacherId,'sectionId'=>$sectionId,'roomId'=>$roomId,'dayId'=>$dayId,'slotId'=>$slotId);
-                            DB::table('routines')->insert($assign);
-                           // $slotId++;
-                            $b++;
+                                $roomId=$room->id;
+                                $slotId=$slot->id;
+                                if($b==0){
+                                    $dayId=$day->id;
+                                }if($b==1){
+                                    $dayId=$day->id+1;
+                                    $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slot->id,$dayId);
+                                    while(!empty($isThereAlreadyAclass)){
+                                        $dayId+=$day->id+1;
+                                        $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slot->id,$dayId);
+                                    }    
+                                }
+                                $assign=array('courseId'=>$courseId,'teacherId'=>$teacherId,'sectionId'=>$sectionId,'roomId'=>$roomId,'dayId'=>$dayId,'slotId'=>$slotId);
+                                DB::table('routines')->insert($assign);
+                                $b++;
                             }
                             return redirect()->route("routines");
-                        }
-                        else{
-                        $roomId=$room->id;
-                        $dayId=$day->id;
-                        $slotId=$slot->id;                    
-                        $assign=array('courseId'=>$courseId,'teacherId'=>$teacherId,'sectionId'=>$sectionId,'roomId'=>$roomId,'dayId'=>$dayId,'slotId'=>$slotId);
-                        DB::table('routines')->insert($assign);
-                        $request->session()->flash('alert-success', 'Successfully assigned!');
-                        return redirect()->route("routines");
+                        }else{
+                            $roomId=$room->id;
+                            $dayId=$day->id;
+                            $slotId=$slot->id;                    
+                            $assign=array('courseId'=>$courseId,'teacherId'=>$teacherId,'sectionId'=>$sectionId,'roomId'=>$roomId,'dayId'=>$dayId,'slotId'=>$slotId);
+                            DB::table('routines')->insert($assign);
+                            $request->session()->flash('alert-success', 'Successfully assigned!');
+                            return redirect()->route("routines");
                     }   }                     
                 }
             }
