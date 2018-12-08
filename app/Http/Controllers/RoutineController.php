@@ -187,6 +187,7 @@ class RoutineController extends Controller{
                 foreach($slots as $slot){
                     foreach($rooms as $room){
                         $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slot->id,$day->id);
+                        $aa = Routine::select('teacherId')->where('teacherId','=', $teacherId)->first();
                         foreach ($routines as $item) {
                             if($isThereAlreadyAclass == $one){
                                 break;
@@ -194,7 +195,7 @@ class RoutineController extends Controller{
                             else if($teacherDayoff->offday == $day->day){
                                 break;
                             }
-                            else if($lastClassofTeacher->slotId == $slot->id-1 || $lastClassofTeacher->slotId == $slot->id+1){
+                            else if(!empty($aa) && ($lastClassofTeacher->slotId == $slot->id-1 || $lastClassofTeacher->slotId == $slot->id+1)){
                                 break;
                             }
                             else if($courseForSectionPerDay == $one){
@@ -208,37 +209,36 @@ class RoutineController extends Controller{
                             else if($classType->type == "Lab"){
                                 $b=0;
                                 while($b<2){
-                                $roomId=$room->id;
-                                $dayId=$day->id;
-                                //dd($slot->id);
-                                if($b==0){
-                                $slotId=$slot->id;
-                                }if($b==1){
-                                    $slotId=$slot->id+1;
-                                }
-                                $assign=array('courseId'=>$courseId,'teacherId'=>$teacherId,'sectionId'=>$sectionId,'roomId'=>$roomId,'dayId'=>$dayId,'slotId'=>$slotId);
-                                DB::table('routines')->insert($assign);
-                               // $slotId++;
-                                $b++;
+                                    $roomId=$room->id;
+                                    $dayId=$day->id;
+                                    if($b==0){
+                                        $slotId=$slot->id;
+                                    }if($b==1){
+                                        $slotId=$slot->id+1;
+                                    }
+                                    $assign=array('courseId'=>$courseId,'teacherId'=>$teacherId,'sectionId'=>$sectionId,'roomId'=>$roomId,'dayId'=>$dayId,'slotId'=>$slotId);
+                                    DB::table('routines')->insert($assign);
+                                    $b++;
                                 }
                                 return redirect()->route("routines");
-                            }
-                            else if($classType->type == "Theory"){
+                            }else if($classType->type == "Theory"){
                                 $b=0;
                                 while($b<2){
-                                $roomId=$room->id;
-                                $slotId=$slot->id;
-                                
-                                //dd($slot->id);
-                                if($b==0){
-                                    $dayId=$day->id;
-                                }if($b==1){
-                                    $dayId=$day->id+1;
-                                }
-                                $assign=array('courseId'=>$courseId,'teacherId'=>$teacherId,'sectionId'=>$sectionId,'roomId'=>$roomId,'dayId'=>$dayId,'slotId'=>$slotId);
-                                DB::table('routines')->insert($assign);
-                               // $slotId++;
-                                $b++;
+                                    $roomId=$room->id;
+                                    $slotId=$slot->id;
+                                    if($b==0){
+                                        $dayId=$day->id;
+                                    }if($b==1){
+                                        $dayId=$day->id+1;
+                                        $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slot->id,$dayId);
+                                        while(!empty($isThereAlreadyAclass)){
+                                            $dayId+=$day->id+1;
+                                            $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slot->id,$dayId);
+                                        }    
+                                    }
+                                    $assign=array('courseId'=>$courseId,'teacherId'=>$teacherId,'sectionId'=>$sectionId,'roomId'=>$roomId,'dayId'=>$dayId,'slotId'=>$slotId);
+                                    DB::table('routines')->insert($assign);
+                                    $b++;
                                 }
                                 return redirect()->route("routines");
                             }
