@@ -127,6 +127,14 @@ class RoutineController extends Controller{
         return $ClassType;
 
     }
+
+    public function lastClassofTeacher($dayId,$teacherId){
+        $lastClassofTeacher = Routine::select('slotId')
+        ->where('dayId','=', $dayId)->where('teacherId', '=', $teacherId)->orderBy('slotId', 'desc')->first();;
+       //dd($lastClassofTeacher);
+        return $lastClassofTeacher;
+
+    }
     public function insertRoutine(Request $request){
         $this->validate($request,[
              'courseId'=>'required|max:255',
@@ -175,6 +183,7 @@ class RoutineController extends Controller{
             foreach($days as $day){
                 $counter = RoutineController::counter($day->id, $sectionId, $teacherId);
                 $courseForSectionPerDay = RoutineController::courseForSectionPerDay($courseId, $sectionId,$day->id);
+                $lastClassofTeacher = RoutineController::lastClassofTeacher($day->id,$teacherId);
                 foreach($slots as $slot){
                     foreach($rooms as $room){
                         $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slot->id,$day->id);
@@ -185,6 +194,7 @@ class RoutineController extends Controller{
                             else if($teacherDayoff->offday == $day->day){
                                 break;
                             }
+                           
                             else if($courseForSectionPerDay == $one){
                                 break;
                             }
@@ -221,7 +231,7 @@ class RoutineController extends Controller{
                                 if($b==0){
                                     $dayId=$day->id;
                                 }if($b==1){
-                                    $slotId=$slot->id+1;
+                                    $dayId=$day->id+1;
                                 }
                                 $assign=array('courseId'=>$courseId,'teacherId'=>$teacherId,'sectionId'=>$sectionId,'roomId'=>$roomId,'dayId'=>$dayId,'slotId'=>$slotId);
                                 DB::table('routines')->insert($assign);
