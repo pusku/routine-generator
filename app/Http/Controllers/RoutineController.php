@@ -147,7 +147,7 @@ class RoutineController extends Controller{
     public function lastClassofTeacher($dayId,$teacherId){
         $lastClassofTeacher = Routine::select('slotId')
         ->where('dayId','=', $dayId)->where('teacherId', '=', $teacherId)->orderBy('slotId', 'desc')->first();
-       //dd($lastClassofTeacher);
+      // dd($lastClassofTeacher);
         return $lastClassofTeacher;
 
     }
@@ -200,12 +200,20 @@ class RoutineController extends Controller{
                 $counter = RoutineController::counter($day->id, $sectionId, $teacherId);
                 $courseForSectionPerDay = RoutineController::courseForSectionPerDay($courseId, $sectionId,$day->id);
                 $lastClassofTeacher = RoutineController::lastClassofTeacher($day->id,$teacherId);
+                //dd($lastClassofTeacher->slotId);
                 foreach($slots as $slot){
                     foreach($rooms as $room){
                         $isTisTeacherHasClassinThisSlot = RoutineController::isTisTeacherHasClassinThisSlot($teacherId,$slot->id,$day->id);
                         $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slot->id,$day->id);
                         $aa = Routine::select('teacherId')->where('teacherId','=', $teacherId)->first();
-                        if($isThereAlreadyAclass == $one){
+                        // dd($lastClassofTeacher->slotId);
+                        if(!empty($aa) && !empty($slot->id+1)){
+                            
+                            if($lastClassofTeacher->slotId == $slot->id-1 || $lastClassofTeacher->slotId == $slot->id+1){
+                                
+                                break;
+                            }
+                        }else if($isThereAlreadyAclass == $one){
                             break;
                         }
                         foreach ($routines as $item) {
@@ -215,9 +223,7 @@ class RoutineController extends Controller{
                             else if($teacherDayoff->offday == $day->day){
                                 break;
                             }
-                            else if(!empty($aa) && !empty($slot->id+1) && ($lastClassofTeacher->slotId == $slot->id-1 || $lastClassofTeacher->slotId == $slot->id+1)){
-                                break;
-                            }
+                           
                             else if($courseForSectionPerDay == $one){
                                 break;
                             }
