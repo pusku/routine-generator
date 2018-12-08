@@ -48,8 +48,9 @@ class TeacherController extends Controller{
         $data = DB::table('teachers')->get();
         $teacherData=DB::table('teachers')->get();
         $teacherEditInfo = Teacher::find($id);
+        $days = Day::get();
         // dd($groupData);
-        return view('teachers',compact('data','teacherData','teacherEditInfo'));
+        return view('teachers',compact('data','teacherData','teacherEditInfo','days'));
     }
 
     public function deleteTeacher($id){
