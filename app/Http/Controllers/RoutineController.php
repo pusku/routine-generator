@@ -217,7 +217,7 @@ class RoutineController extends Controller{
                                         $slotId=$slot->id+1;
                                         $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slotId,$day->id);
                                         while(!empty($isThereAlreadyAclass)){
-                                            $slotId+=$slot->id+1;
+                                            $slotId++;
                                             $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slotId,$day->id);
                                         }    
                                     }
@@ -237,7 +237,7 @@ class RoutineController extends Controller{
                                         $dayId=$day->id+1;
                                         $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slot->id,$dayId);
                                         while(!empty($isThereAlreadyAclass)){
-                                            $dayId+=$day->id+1;
+                                            $dayId++;
                                             $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slot->id,$dayId);
                                         }    
                                     }
@@ -278,7 +278,7 @@ class RoutineController extends Controller{
                                 if($b==0){
                                     $slotId=$slot->id;
                                 }if($b==1){
-                                    $slotId=$slot->id+1;
+                                    $slotId++;;
                                     $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slotId,$day->id);
                                     while(!empty($isThereAlreadyAclass)){
                                         $slotId+=$slot->id+1;
@@ -298,7 +298,7 @@ class RoutineController extends Controller{
                                 if($b==0){
                                     $dayId=$day->id;
                                 }if($b==1){
-                                    $dayId=$day->id+1;
+                                    $dayId++;;
                                     $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slot->id,$dayId);
                                     while(!empty($isThereAlreadyAclass)){
                                         $dayId+=$day->id+1;
