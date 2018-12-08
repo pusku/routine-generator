@@ -211,13 +211,13 @@ class RoutineController extends Controller{
                         if($isThereAlreadyAclass == $one){
                             break;
                         }
-                        else if(is_null($aa) || is_null($slot->id+1)){
+                        // else if(is_null($aa) || is_null($slot->id+1)){
                             
-                            break;
-                        }else if($lastClassofTeacher->slotId == $slot->id-1 || $lastClassofTeacher->slotId == $slot->id+1){
+                        //     break;
+                        // }else if($lastClassofTeacher->slotId == $slot->id-1 || $lastClassofTeacher->slotId == $slot->id+1){
                                 
-                                break;
-                            }
+                        //         break;
+                        //     }
                         foreach ($routines as $item) {
                             if($isThereAlreadyAclass == $one){
                                 break;
