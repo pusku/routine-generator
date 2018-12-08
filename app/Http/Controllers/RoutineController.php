@@ -260,10 +260,12 @@ class RoutineController extends Controller{
                                             }else{
                                                 if($dayId+1>= $bbb->id){
                                                     $dayId--;
+                                                    $slotId=1;
                                                 }else{
                                                     $dayId++;
+                                                    $slotId=1;
                                                 }
-                                                $slotId=1;
+                                                
                                             }
                                             $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slotId,$day->id);
                                         } 
@@ -279,10 +281,12 @@ class RoutineController extends Controller{
 
                                                 if($dayId+1>= $bbb->id){
                                                     $dayId--;
+                                                    $slotId=1;
                                                 }else{
                                                     $dayId++;
+                                                    $slotId=1;
                                                 }
-                                                $slotId=1;
+                                               
                                             }
                                             $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slotId,$dayId);
                                         }    
