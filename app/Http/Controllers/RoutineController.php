@@ -119,6 +119,22 @@ class RoutineController extends Controller{
         }
         return $flag;
     }
+
+    public function isTisTeacherHasClassinThisSlot($teacherId, $slotId, $dayId){
+        $courseCount = 0;
+        $flag=0;
+        $routines = Routine:: get();
+        //$data=Course::find($courseId);
+        foreach ($routines as $item) {
+            if($item->teacherId == $teacherId && $item->dayId == $dayId && $item->slotId == $slotId){
+                 $courseCount++;
+            }
+        }
+        if($courseCount == 1){
+            $flag=1;
+        }
+        return $flag;
+    }
     public function classType($courseId){
         $ClassType = Course::select('type')
         ->where('id','=', $courseId)
@@ -130,7 +146,7 @@ class RoutineController extends Controller{
 
     public function lastClassofTeacher($dayId,$teacherId){
         $lastClassofTeacher = Routine::select('slotId')
-        ->where('dayId','=', $dayId)->where('teacherId', '=', $teacherId)->orderBy('slotId', 'desc')->first();;
+        ->where('dayId','=', $dayId)->where('teacherId', '=', $teacherId)->orderBy('slotId', 'desc')->first();
        //dd($lastClassofTeacher);
         return $lastClassofTeacher;
 
@@ -186,8 +202,12 @@ class RoutineController extends Controller{
                 $lastClassofTeacher = RoutineController::lastClassofTeacher($day->id,$teacherId);
                 foreach($slots as $slot){
                     foreach($rooms as $room){
+                        $isTisTeacherHasClassinThisSlot = RoutineController::isTisTeacherHasClassinThisSlot($teacherId,$slot->id,$day->id);
                         $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slot->id,$day->id);
                         $aa = Routine::select('teacherId')->where('teacherId','=', $teacherId)->first();
+                        if($isThereAlreadyAclass == $one){
+                            break;
+                        }
                         foreach ($routines as $item) {
                             if($isThereAlreadyAclass == $one){
                                 break;
@@ -203,13 +223,14 @@ class RoutineController extends Controller{
                             }
                             else if($counter == $one){
                                 break;
-                            }else if($item->teacherId == $teacherId && $item->dayId == $day->id && $item->slotId == $slot->id){
-                                break;
-                            }
-                            else if($classType->type == "Lab"){
+                            }else if($classType->type == "Lab"){
                                 $b=0;
                                 while($b<2){
                                     $roomId=$room->id;
+                                    $roomType=$room->type;
+                                    while($roomType=="Theory"){
+                                        $roomId++;
+                                    }
                                     $dayId=$day->id;
                                     if($b==0){
                                         $slotId=$slot->id;
@@ -230,6 +251,10 @@ class RoutineController extends Controller{
                                 $b=0;
                                 while($b<2){
                                     $roomId=$room->id;
+                                    $roomType=$room->type;
+                                    while($roomType=="Lab"){
+                                        $roomId++;
+                                    }
                                     $slotId=$slot->id;
                                     if($b==0){
                                         $dayId=$day->id;
@@ -274,6 +299,10 @@ class RoutineController extends Controller{
                             $b=0;
                             while($b<2){
                                 $roomId=$room->id;
+                                $roomType=$room->type;
+                                while($roomType=="Theory"){
+                                    $roomId++;
+                                }
                                 $dayId=$day->id;
                                 if($b==0){
                                     $slotId=$slot->id;
@@ -294,6 +323,10 @@ class RoutineController extends Controller{
                             $b=0;
                             while($b<2){
                                 $roomId=$room->id;
+                                $roomType=$room->type;
+                                while($roomType=="Lab"){
+                                    $roomId++;
+                                }
                                 $slotId=$slot->id;
                                 if($b==0){
                                     $dayId=$day->id;
