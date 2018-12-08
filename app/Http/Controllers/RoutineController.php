@@ -226,10 +226,16 @@ class RoutineController extends Controller{
                             }else if($classType->type == "Lab"){
                                 $b=0;
                                 while($b<2){
-                                    $roomId=$room->id;
+                                    
                                     $roomType=$room->type;
-                                    while($roomType=="Theory"){
-                                        $roomId++;
+                                    if($roomType=="Theory"){
+                                        foreach($rooms as $room){
+                                            if($room->type=="Lab"){
+                                                $roomId=$room->id;
+                                            }
+                                        }
+                                    }else{
+                                        $roomId=$room->id;
                                     }
                                     $dayId=$day->id;
                                     if($b==0){
@@ -250,10 +256,16 @@ class RoutineController extends Controller{
                             }else if($classType->type == "Theory"){
                                 $b=0;
                                 while($b<2){
-                                    $roomId=$room->id;
+                                   // $roomId=$room->id;
                                     $roomType=$room->type;
-                                    while($roomType=="Lab"){
-                                        $roomId++;
+                                    if($roomType=="Lab"){
+                                        foreach($rooms as $room){
+                                            if($room->type=="Theory"){
+                                                $roomId=$room->id;
+                                            }
+                                        }
+                                    }else{
+                                        $roomId=$room->id;
                                     }
                                     $slotId=$slot->id;
                                     if($b==0){
@@ -298,10 +310,16 @@ class RoutineController extends Controller{
                         else if($classType->type == "Lab"){
                             $b=0;
                             while($b<2){
-                                $roomId=$room->id;
+                                //$roomId=$room->id;
                                 $roomType=$room->type;
-                                while($roomType=="Theory"){
-                                    $roomId++;
+                                if($roomType=="Theory"){
+                                    foreach($rooms as $room){
+                                        if($room->type=="Lab"){
+                                            $roomId=$room->id;
+                                        }
+                                    }
+                                }else{
+                                    $roomId=$room->id;
                                 }
                                 $dayId=$day->id;
                                 if($b==0){
@@ -322,10 +340,17 @@ class RoutineController extends Controller{
                         }else if($classType->type == "Theory"){
                             $b=0;
                             while($b<2){
-                                $roomId=$room->id;
+                                //$roomId=$room->id;
                                 $roomType=$room->type;
-                                while($roomType=="Lab"){
-                                    $roomId++;
+                                $roomType=$room->type;
+                                if($roomType=="Lab"){
+                                    foreach($rooms as $room){
+                                        if($room->type=="Theory"){
+                                            $roomId=$room->id;
+                                        }
+                                    }
+                                }else{
+                                    $roomId=$room->id;
                                 }
                                 $slotId=$slot->id;
                                 if($b==0){
