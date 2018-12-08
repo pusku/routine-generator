@@ -256,6 +256,14 @@ class RoutineController extends Controller{
                                         $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slotId,$day->id);
                                         while(!empty($isThereAlreadyAclass)){
                                             $slotId++;
+                                            $aaa = Slot::select('id')->orderBy('id', 'desc')->first();
+                                            $bbb = Day::select('id')->orderBy('id', 'desc')->first();
+                                            if($slotId>=$aaa){
+                                                if($dayId+1>= $bbb){
+                                                    $dayId--;
+                                                }
+                                                $dayId++;
+                                            }
                                             $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slotId,$day->id);
                                         }    
                                     }
