@@ -231,7 +231,7 @@ class RoutineController extends Controller{
                             }
                             else if($counter == $one){
                                 break;
-                            }else if($isTisTeacherHasClassinThisSlot == one){
+                            }else if($isTisTeacherHasClassinThisSlot == $one){
                                 break;
                             }
                             else if($classType->type == "Lab"){
