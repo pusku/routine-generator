@@ -258,8 +258,8 @@ class RoutineController extends Controller{
                                             $slotId++;
                                             $aaa = Slot::select('id')->orderBy('id', 'desc')->first();
                                             $bbb = Day::select('id')->orderBy('id', 'desc')->first();
-                                            if($slotId>=$aaa){
-                                                if($dayId+1>= $bbb){
+                                            if($slotId>=$aaa->id){
+                                                if($dayId+1>= $bbb->id){
                                                     $dayId--;
                                                 }
                                                 $dayId++;
