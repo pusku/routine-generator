@@ -215,7 +215,7 @@ class RoutineController extends Controller{
                             else if($teacherDayoff->offday == $day->day){
                                 break;
                             }
-                            else if(!empty($aa) && ($lastClassofTeacher->slotId == $slot->id-1 || $lastClassofTeacher->slotId == $slot->id+1)){
+                            else if(!empty($aa) && !empty($slot->id+1) && ($lastClassofTeacher->slotId == $slot->id-1 || $lastClassofTeacher->slotId == $slot->id+1)){
                                 break;
                             }
                             else if($courseForSectionPerDay == $one){
