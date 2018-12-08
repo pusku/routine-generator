@@ -252,32 +252,39 @@ class RoutineController extends Controller{
                                     if($b==0){
                                         $slotId=$slot->id;
                                         $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slotId,$day->id);
+                                        $aaa = Slot::select('id')->orderBy('id', 'desc')->first();
+                                        $bbb = Day::select('id')->orderBy('id', 'desc')->first();
                                         while(!empty($isThereAlreadyAclass)){
-                                            $slotId++;
-                                            $aaa = Slot::select('id')->orderBy('id', 'desc')->first();
-                                            $bbb = Day::select('id')->orderBy('id', 'desc')->first();
                                             if($slotId>=$aaa->id){
+                                                $slotId++;
+                                            }else{
                                                 if($dayId+1>= $bbb->id){
                                                     $dayId--;
+                                                }else{
+                                                    $dayId++;
                                                 }
-                                                $dayId++;
+                                                $slotId=1;
                                             }
                                             $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slotId,$day->id);
                                         } 
                                     }if($b==1){
                                         $slotId=$slot->id+1;
-                                        $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slotId,$day->id);
+                                        $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slotId,$dayId);
+                                        $aaa = Slot::select('id')->orderBy('id', 'desc')->first();
+                                        $bbb = Day::select('id')->orderBy('id', 'desc')->first();
                                         while(!empty($isThereAlreadyAclass)){
-                                            $slotId++;
-                                            $aaa = Slot::select('id')->orderBy('id', 'desc')->first();
-                                            $bbb = Day::select('id')->orderBy('id', 'desc')->first();
                                             if($slotId>=$aaa->id){
+                                                $slotId++;
+                                            }else{
+
                                                 if($dayId+1>= $bbb->id){
                                                     $dayId--;
+                                                }else{
+                                                    $dayId++;
                                                 }
-                                                $dayId++;
+                                                $slotId=1;
                                             }
-                                            $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slotId,$day->id);
+                                            $isThereAlreadyAclass = RoutineController::isThereAlreadyAclass($room->id, $slotId,$dayId);
                                         }    
                                     }
                                     $assign=array('courseId'=>$courseId,'teacherId'=>$teacherId,'sectionId'=>$sectionId,'roomId'=>$roomId,'dayId'=>$dayId,'slotId'=>$slotId);
